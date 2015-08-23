@@ -1,3 +1,6 @@
 [submodule "Arduino/libraries/ITG3200"]
 	path = Arduino/libraries/ITG3200
 	url = https://github.com/rowoflo/ArduinoLibrary_ITG3200.git
+[submodule "Arduino/libraries/ADXL345"]
+	path = Arduino/libraries/ADXL345
+	url = https://github.com/rowoflo/ArduinoLibrary_ADXL345.git
