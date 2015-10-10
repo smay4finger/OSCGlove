@@ -7,4 +7,4 @@ if [ -z "${SKETCH}" ] ; then
     SKETCH=OSCGlove
 fi
 
-exec arduino --upload --board arduino:avr:micro --pref sketchbook.path=${SKETCHBOOK} ${SKETCHBOOK}/${SKETCH}/${SKETCH}.ino
+exec arduino --upload --board arduino:avr:flora8 ${SKETCHBOOK}/${SKETCH}/${SKETCH}.ino
