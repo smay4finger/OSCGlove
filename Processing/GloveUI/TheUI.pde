@@ -1,6 +1,7 @@
 ControlP5 cp5;
 
-Textfield uiHostname;
+Textfield uiHostnameOSC;
+Numberbox uiPortOSC;
 Button uiConnectOSC;
 ScrollableList uiSelectedSerialPort;
 Button uiConnectSerialPort;
@@ -22,11 +23,19 @@ public void createUI() {
     }
   };
 
-  uiHostname = cp5.addTextfield("uiHostname")
+  uiHostnameOSC = cp5.addTextfield("uiHostnameOSC")
     .setPosition(5, 5)
-    .setSize(150, 20)
+    .setSize(100, 20)
     .setLabel("")
-    .setValue("localhost")
+    .setValue("127.0.0.1")
+    ;
+  uiPortOSC = cp5.addNumberbox("uiPortOSC")
+    .setPosition(110, 5)
+    .setSize(45, 20)
+    .setLabel("")
+    .setValue(8000)
+    .setRange(1, 65535)
+    .setDecimalPrecision(0)
     ;
   uiConnectOSC = cp5.addButton("uiConnectOSC")
     .setPosition(160, 5)
@@ -61,11 +70,14 @@ public void createUI() {
 
 void controlEvent(ControlEvent theEvent) {
   if (theEvent.isFrom(uiConnectOSC)) {
-    println("connect to OSC");
     if (uiConnectOSC.isOn()) {
-      uiHostname.setLock(true);
+      uiHostnameOSC.setLock(true);
+      uiPortOSC.setLock(true);
+      oscConnect(uiHostnameOSC.getText(), (int)uiPortOSC.getValue());
     } else {
-      uiHostname.setLock(false);
+      uiHostnameOSC.setLock(false);
+      uiPortOSC.setLock(false);
+      oscDisconnect();
     }
   }
 
