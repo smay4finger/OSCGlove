@@ -87,12 +87,13 @@ void controlEvent(ControlEvent theEvent) {
   }
 
   if (theEvent.isFrom(uiConnectSerialPort)) {
-    println("connect to serial port");
     if (uiConnectSerialPort.isOn()) {
       uiSelectedSerialPort.setLock(true);
       uiSelectedSerialPort.setOpen(false);
+      gloveConnect(uiSelectedSerialPort.getLabel());
     } else {
       uiSelectedSerialPort.setLock(false);
+      gloveDisconnect();
     }
   }
 
