@@ -16,6 +16,16 @@ void oscDisconnect() {
   }
 }
 
+void oscUpdate() {
+  if (oscClient != null) {
+    oscClient.send("/foobar", new Object[] {
+      gloveOrientationX, 
+      gloveOrientationY, 
+      gloveOrientationZ, 
+      });
+  }
+}
+
 void oscEvent(OscMessage theMessage) {
   System.out.println("### got a message " + theMessage);
 }

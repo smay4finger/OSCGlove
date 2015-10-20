@@ -13,15 +13,15 @@ void setup() {
 
   createUI();
 
-  hand = createShape(BOX, 30, 30, 10);
+  hand = createShape(BOX, 100, 10, 100);
 }
 
 void draw() {
   background(128);
-
+  
   hand.resetMatrix();
-  hand.rotateY(map(mouseX, 0, width, 0, PI*2));
-  hand.rotateX(map(mouseY, 0, height, 0, PI*2));
+  hand.rotateZ(radians(-gloveOrientationZ));
+  hand.rotateX(radians(-gloveOrientationY));
   hand.translate(width/2, height/2);
 
   shape(hand);
