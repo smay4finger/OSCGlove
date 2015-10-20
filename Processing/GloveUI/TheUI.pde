@@ -23,14 +23,17 @@ public void createUI() {
     }
   };
 
+  cp5.addTab("default");
+  cp5.addTab("glove settings");
+
   uiHostnameOSC = cp5.addTextfield("uiHostnameOSC")
-    .setPosition(5, 5)
+    .setPosition(5, 25)
     .setSize(100, 20)
     .setLabel("")
     .setValue("127.0.0.1")
     ;
   uiPortOSC = cp5.addNumberbox("uiPortOSC")
-    .setPosition(110, 5)
+    .setPosition(110, 25)
     .setSize(45, 20)
     .setLabel("")
     .setValue(8000)
@@ -38,14 +41,14 @@ public void createUI() {
     .setDecimalPrecision(0)
     ;
   uiConnectOSC = cp5.addButton("uiConnectOSC")
-    .setPosition(160, 5)
+    .setPosition(160, 25)
     .setSize(50, 20)
     .setLabel("connect")
     .setSwitch(true)
     ;
   uiSelectedSerialPort = cp5.addScrollableList("uiSelectedSerialPort")
     .addItems(Arrays.asList(Serial.list()))
-    .setPosition(5, 30)
+    .setPosition(5, 50)
     .setSize(150, 100)
     .setBarHeight(20)
     .setItemHeight(20)
@@ -56,15 +59,17 @@ public void createUI() {
     .close()
     ;
   uiConnectSerialPort = cp5.addButton("uiConnectSerialPort")
-    .setPosition(160, 30)
+    .setPosition(160, 50)
     .setSize(50, 20)
     .setLabel("connect")
     .setSwitch(true)
     ;
+
   cp5.addFrameRate()
     .setInterval(10)
     .setPosition(5, height-15)
     .setSize(40, 20)
+    .moveTo("global")
     ;
 }
 
