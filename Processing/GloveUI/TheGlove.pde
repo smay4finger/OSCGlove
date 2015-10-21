@@ -31,7 +31,7 @@ void serialEvent(Serial p) {
     oscUpdate();
   }
   catch(RuntimeException e) {
-    // ignore, which is bullshit
-    // there is no other chance, as Processing is for stupid artists only
+    // ignore
+    // there is no other chance, as Processing is doint this by design
   }
 }
