@@ -28,9 +28,9 @@ void draw() {
   line( width/2, 
     height/2, 
     0, 
-    gloveLinearY * 10.0 + width/2, 
+    -gloveLinearY * 10.0 + width/2, 
     gloveLinearZ * 10.0 + height/2, 
-    gloveLinearX * 10.0);
+    -gloveLinearX * 10.0);
 
   stroke(0, 255, 0);
   line(width/2, 
