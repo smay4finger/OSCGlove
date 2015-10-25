@@ -1,8 +1,8 @@
 Serial glove;
 
-public volatile float gloveOrientationX = 0.0;
-public volatile float gloveOrientationY = 0.0;
-public volatile float gloveOrientationZ = 0.0;
+public volatile float gloveEulerX = 0.0;
+public volatile float gloveEulerY = 0.0;
+public volatile float gloveEulerZ = 0.0;
 
 public void gloveConnect(String serialPort) {
   if (glove != null) {
@@ -25,9 +25,10 @@ void serialEvent(Serial p) {
   String inString = p.readString();
   try {
     JSONObject data = parseJSONObject(inString);
-    gloveOrientationX = data.getJSONObject("orientation").getFloat("x");
-    gloveOrientationY = data.getJSONObject("orientation").getFloat("y");
-    gloveOrientationZ = data.getJSONObject("orientation").getFloat("z");
+    gloveEulerX = data.getJSONObject("euler").getFloat("x");
+    gloveEulerY = data.getJSONObject("euler").getFloat("y");
+    gloveEulerZ = data.getJSONObject("euler").getFloat("z");
+
     oscUpdate();
     uiUpdate();
   }

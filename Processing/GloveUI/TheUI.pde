@@ -6,9 +6,9 @@ Button uiConnectOSC;
 ScrollableList uiSelectedSerialPort;
 Button uiConnectSerialPort;
 
-Slider uiOrientationX;
-Slider uiOrientationY;
-Slider uiOrientationZ;
+Slider uiEulerX;
+Slider uiEulerY;
+Slider uiEulerZ;
 
 public void createUI() {
 
@@ -78,24 +78,24 @@ public void createUI() {
     ;
 
 
-  cp5.addLabel("ORIENTATION")
+  cp5.addLabel("Euler")
     .setPosition(5, 25)
     .setFont(createFont("", 15))
     .moveTo("raw");
 
-  uiOrientationX = cp5.addSlider("X")
+  uiEulerX = cp5.addSlider("X")
     .setPosition(5, 47)
     .setSize(150, 12)
     .setRange(0, 360)
     .setLock(true)
     .moveTo("raw");
-  uiOrientationY = cp5.addSlider("Y")
+  uiEulerY = cp5.addSlider("Y")
     .setPosition(5, 62)
     .setSize(150, 12)
     .setRange(-180, 180)
     .setLock(true)
     .moveTo("raw");
-  uiOrientationZ = cp5.addSlider("Z")
+  uiEulerZ = cp5.addSlider("Z")
     .setPosition(5, 77)
     .setSize(150, 12)
     .setRange(-180, 180)
@@ -104,9 +104,9 @@ public void createUI() {
 }
 
 void uiUpdate() {
-  uiOrientationX.setValue(gloveOrientationX);
-  uiOrientationY.setValue(gloveOrientationY);
-  uiOrientationZ.setValue(gloveOrientationZ);
+  uiEulerX.setValue(gloveEulerX);
+  uiEulerY.setValue(gloveEulerY);
+  uiEulerZ.setValue(gloveEulerZ);
 }
 
 void controlEvent(ControlEvent theEvent) {

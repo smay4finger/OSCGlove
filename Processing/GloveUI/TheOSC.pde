@@ -19,9 +19,9 @@ void oscDisconnect() {
 void oscUpdate() {
   if (oscClient != null) {
     oscClient.send("/foobar", new Object[] {
-      gloveOrientationX, 
-      gloveOrientationY, 
-      gloveOrientationZ, 
+      gloveEulerX,
+      gloveEulerY,
+      gloveEulerZ,
       });
   }
 }

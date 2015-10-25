@@ -16,14 +16,21 @@ void serial_guru_meditation(const __FlashStringHelper* error) {
   }
 }
 
-void serial_message(sensors_event_t& event, uint8_t sys, uint8_t gyro, uint8_t accel, uint8_t mag) {
-  /* ARDUINO IST SCHEISSE!!! */
-  Serial.print(F("{orientation:{x:"));
-  Serial.print((float)event.orientation.x);
+void serial_message(imu::Vector<3> euler, uint8_t sys, uint8_t gyro, uint8_t accel, uint8_t mag) {
+  Serial.print(F("{euler:{x:"));
+  Serial.print(euler.x());
   Serial.print(F(",y:"));
-  Serial.print((float)event.orientation.y);
+  Serial.print(euler.y());
   Serial.print(F(",z:"));
-  Serial.print((float)event.orientation.z);
+  Serial.print(euler.z());
+  Serial.print(F("},cal:{system:"));
+  Serial.print(sys);
+  Serial.print(F(",gyro:"));
+  Serial.print(gyro);
+  Serial.print(F(",accel:"));
+  Serial.print(accel);
+  Serial.print(F(",mag:"));
+  Serial.print(mag);
   Serial.println(F("}}"));
 }
 

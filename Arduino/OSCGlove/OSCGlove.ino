@@ -19,19 +19,20 @@ void setup(void) {
   bno.setExtCrystalUse(true);
 }
 
+void serial_message(imu::Vector<3> euler, uint8_t sys, uint8_t gyro, uint8_t accel, uint8_t mag);
+
 void loop(void) {
   static long next = (long)millis();
 
   if ((long)millis() - next >= 0) {
     next = millis() + 10;
 
-    sensors_event_t event;
-    bno.getEvent(&event);
+    imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
 
     uint8_t sys, gyro, accel, mag = 0;
     bno.getCalibration(&sys, &gyro, &accel, &mag);
 
-    serial_message(event, sys, gyro, accel, mag);
+    serial_message(euler, sys, gyro, accel, mag);
 
     if ((long)millis() - next >= 0) {
       serial_guru_meditation(F("short cycle"));

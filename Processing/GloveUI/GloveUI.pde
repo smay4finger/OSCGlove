@@ -20,8 +20,8 @@ void draw() {
   background(128);
   
   hand.resetMatrix();
-  hand.rotateZ(radians(-gloveOrientationZ));
-  hand.rotateX(radians(-gloveOrientationY));
+  hand.rotateZ(radians(-gloveEulerZ));
+  hand.rotateX(radians(-gloveEulerY));
   hand.translate(width/2, height/2);
 
   shape(hand);
