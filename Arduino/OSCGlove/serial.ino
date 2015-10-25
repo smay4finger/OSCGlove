@@ -16,13 +16,31 @@ void serial_guru_meditation(const __FlashStringHelper* error) {
   }
 }
 
-void serial_message(imu::Vector<3> euler, uint8_t sys, uint8_t gyro, uint8_t accel, uint8_t mag) {
+void serial_message(imu::Vector<3> euler,
+                    imu::Vector<3> linear,
+                    imu::Vector<3> gravity,
+                    uint8_t sys,
+                    uint8_t gyro,
+                    uint8_t accel,
+                    uint8_t mag) {
   Serial.print(F("{euler:{x:"));
   Serial.print(euler.x());
   Serial.print(F(",y:"));
   Serial.print(euler.y());
   Serial.print(F(",z:"));
   Serial.print(euler.z());
+  Serial.print(F("},linear:{x:"));
+  Serial.print(linear.x());
+  Serial.print(F(",y:"));
+  Serial.print(linear.y());
+  Serial.print(F(",z:"));
+  Serial.print(linear.z());
+  Serial.print(F("},gravity:{x:"));
+  Serial.print(gravity.x());
+  Serial.print(F(",y:"));
+  Serial.print(gravity.y());
+  Serial.print(F(",z:"));
+  Serial.print(gravity.z());
   Serial.print(F("},cal:{system:"));
   Serial.print(sys);
   Serial.print(F(",gyro:"));
