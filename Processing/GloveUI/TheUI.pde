@@ -6,6 +6,10 @@ Button uiConnectOSC;
 ScrollableList uiSelectedSerialPort;
 Button uiConnectSerialPort;
 
+Slider uiOrientationX;
+Slider uiOrientationY;
+Slider uiOrientationZ;
+
 public void createUI() {
 
   cp5 = new ControlP5(this);
@@ -25,6 +29,7 @@ public void createUI() {
 
   cp5.addTab("default");
   cp5.addTab("glove settings");
+  cp5.addTab("raw");
 
   uiHostnameOSC = cp5.addTextfield("uiHostnameOSC")
     .setPosition(5, 25)
@@ -71,6 +76,37 @@ public void createUI() {
     .setSize(40, 20)
     .moveTo("global")
     ;
+
+
+  cp5.addLabel("ORIENTATION")
+    .setPosition(5, 25)
+    .setFont(createFont("", 15))
+    .moveTo("raw");
+
+  uiOrientationX = cp5.addSlider("X")
+    .setPosition(5, 47)
+    .setSize(150, 12)
+    .setRange(0, 360)
+    .setLock(true)
+    .moveTo("raw");
+  uiOrientationY = cp5.addSlider("Y")
+    .setPosition(5, 62)
+    .setSize(150, 12)
+    .setRange(-180, 180)
+    .setLock(true)
+    .moveTo("raw");
+  uiOrientationZ = cp5.addSlider("Z")
+    .setPosition(5, 77)
+    .setSize(150, 12)
+    .setRange(-180, 180)
+    .setLock(true)
+    .moveTo("raw");
+}
+
+void uiUpdate() {
+  uiOrientationX.setValue(gloveOrientationX);
+  uiOrientationY.setValue(gloveOrientationY);
+  uiOrientationZ.setValue(gloveOrientationZ);
 }
 
 void controlEvent(ControlEvent theEvent) {

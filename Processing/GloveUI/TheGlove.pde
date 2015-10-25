@@ -29,6 +29,7 @@ void serialEvent(Serial p) {
     gloveOrientationY = data.getJSONObject("orientation").getFloat("y");
     gloveOrientationZ = data.getJSONObject("orientation").getFloat("z");
     oscUpdate();
+    uiUpdate();
   }
   catch(RuntimeException e) {
     // ignore
