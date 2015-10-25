@@ -4,6 +4,14 @@ public volatile float gloveEulerX = 0.0;
 public volatile float gloveEulerY = 0.0;
 public volatile float gloveEulerZ = 0.0;
 
+public volatile float gloveLinearX = 0.0;
+public volatile float gloveLinearY = 0.0;
+public volatile float gloveLinearZ = 0.0;
+
+public volatile float gloveGravityX = 0.0;
+public volatile float gloveGravityY = 0.0;
+public volatile float gloveGravityZ = 0.0;
+
 public void gloveConnect(String serialPort) {
   if (glove != null) {
     gloveDisconnect();
@@ -28,6 +36,12 @@ void serialEvent(Serial p) {
     gloveEulerX = data.getJSONObject("euler").getFloat("x");
     gloveEulerY = data.getJSONObject("euler").getFloat("y");
     gloveEulerZ = data.getJSONObject("euler").getFloat("z");
+    gloveLinearX = data.getJSONObject("linear").getFloat("x");
+    gloveLinearY = data.getJSONObject("linear").getFloat("y");
+    gloveLinearZ = data.getJSONObject("linear").getFloat("z");
+    gloveGravityX = data.getJSONObject("gravity").getFloat("x");
+    gloveGravityY = data.getJSONObject("gravity").getFloat("y");
+    gloveGravityZ = data.getJSONObject("gravity").getFloat("z");
 
     oscUpdate();
     uiUpdate();
