@@ -5,7 +5,13 @@ void oscConnect(String hostname, int port) {
     oscDisconnect();
   }
   println("OSC connect to " + hostname + ":" + port);
-  oscClient = new OscP5(this, hostname, port, OscP5.TCP);
+
+  OscProperties properties = new OscProperties();
+  properties.setRemoteAddress(hostname, port);
+  properties.setListeningPort(port);
+  properties.setSRSP(OscProperties.ON);
+  properties.setDatagramSize(1024);
+  oscClient = new OscP5(this, properties);
 }
 
 void oscDisconnect() {
