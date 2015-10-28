@@ -24,11 +24,10 @@ void oscDisconnect() {
 
 void oscUpdate() {
   if (oscClient != null) {
-    oscClient.send("/foobar", new Object[] {
-      gloveEulerX,
-      gloveEulerY,
-      gloveEulerZ,
-      });
+    
+    oscClient.send("/glove/Z", new Object[] { gloveEulerZ });
+    oscClient.send("/glove/Y", new Object[] { gloveEulerY });
+    oscClient.send("/glove/X", new Object[] { gloveEulerX });
   }
 }
 
