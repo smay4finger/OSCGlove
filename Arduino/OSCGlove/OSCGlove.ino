@@ -6,7 +6,7 @@ static const int LED = 7;
 
 static const int ERROR_BNO055 = 0x5206;
 
-static const int cycle_time_ms = 20; // millisecons
+static const int cycle_time_ms = 25; // millisecons
 
 Adafruit_BNO055 bno = Adafruit_BNO055();
 
@@ -27,7 +27,10 @@ void serial_message(imu::Vector<3> euler,
                     uint8_t sys,
                     uint8_t gyro,
                     uint8_t accel,
-                    uint8_t mag);
+                    uint8_t mag,
+                    uint16_t a1,
+                    uint16_t a2,
+                    uint16_t a3);
 
 void loop(void) {
   static long next = (long)millis();
@@ -42,7 +45,8 @@ void loop(void) {
     uint8_t sys, gyro, accel, mag = 0;
     bno.getCalibration(&sys, &gyro, &accel, &mag);
 
-    serial_message(euler, linear, gravity, sys, gyro, accel, mag);
+    serial_message(euler, linear, gravity, sys, gyro, accel, mag,
+                   analogRead(A10), analogRead(A9), analogRead(A7));
 
     if ((long)millis() - next >= 0) {
       serial_guru_meditation(F("short cycle"));

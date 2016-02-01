@@ -22,7 +22,10 @@ void serial_message(imu::Vector<3> euler,
                     uint8_t sys,
                     uint8_t gyro,
                     uint8_t accel,
-                    uint8_t mag) {
+                    uint8_t mag,
+                    uint16_t a1,
+                    uint16_t a2,
+                    uint16_t a3) {
   Serial.print(F("{euler:{x:"));
   Serial.print(euler.x());
   Serial.print(F(",y:"));
@@ -49,6 +52,12 @@ void serial_message(imu::Vector<3> euler,
   Serial.print(accel);
   Serial.print(F(",mag:"));
   Serial.print(mag);
-  Serial.println(F("}}"));
+  Serial.print(F("},a1:"));
+  Serial.print(a1);
+  Serial.print(F(",a2:"));
+  Serial.print(a2);
+  Serial.print(F(",a3:"));
+  Serial.print(a3);
+  Serial.println(F("}"));
 }
 
