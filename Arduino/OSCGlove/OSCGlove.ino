@@ -6,19 +6,27 @@ static const int LED = 7;
 
 static const int ERROR_BNO055 = 0x5206;
 
-static const int cycle_time_ms = 25; // millisecons
+static const int cycle_time_ms = 30; // millisecons
 
 Adafruit_BNO055 bno = Adafruit_BNO055();
 
 void setup(void) {
-  serial_init();
+  pinMode(LED, OUTPUT);
+  Serial.begin(115200);
+  while (!Serial) {
+    digitalWrite(LED, HIGH); delay(10);
+    digitalWrite(LED, LOW); delay(50);
+  }
 
   if (!bno.begin()) {
-    serial_guru_meditation(F("BNO055 initialization"));
+    for (;;) {
+      digitalWrite(LED, LOW); delay(10);
+      digitalWrite(LED, HIGH); delay(50);
+    }
   }
   bno.setExtCrystalUse(true);
 
-  delay(3000);
+  delay(300);
 }
 
 void serial_message(imu::Vector<3> euler,
@@ -32,24 +40,90 @@ void serial_message(imu::Vector<3> euler,
                     uint16_t a2,
                     uint16_t a3);
 
-void loop(void) {
-  static long next = (long)millis();
+imu::Vector<3> euler;
+imu::Vector<3> linear;
+imu::Vector<3> gravity;
+uint8_t sys, gyro, accel, mag;
+uint16_t middle_finger;
+uint16_t ring_finger;
+uint16_t little_finger;
 
-  if ((long)millis() - next >= 0) {
-    next = millis() + cycle_time_ms;
-
-    imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
-    imu::Vector<3> linear = bno.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
-    imu::Vector<3> gravity = bno.getVector(Adafruit_BNO055::VECTOR_GRAVITY);
-
-    uint8_t sys, gyro, accel, mag = 0;
-    bno.getCalibration(&sys, &gyro, &accel, &mag);
-
-    serial_message(euler, linear, gravity, sys, gyro, accel, mag,
-                   analogRead(A10), analogRead(A9), analogRead(A7));
-
-    if ((long)millis() - next >= 0) {
-      serial_guru_meditation(F("short cycle"));
-    }
+void loop_button(long now, long cycle_time) {
+  static long next = now;
+  if (now - next >= 0) {
+    next = now + cycle_time;
   }
 }
+
+void loop_serial(long now, long cycle_time) {
+  static long next = now;
+  if (now - next >= 0) {
+    next = now + cycle_time;
+    Serial.print(F("{e:{x:"));
+    Serial.print(euler.x());
+    Serial.print(F(",y:"));
+    Serial.print(euler.y());
+    Serial.print(F(",z:"));
+    Serial.print(euler.z());
+    Serial.print(F("},l:{x:"));
+    Serial.print(linear.x());
+    Serial.print(F(",y:"));
+    Serial.print(linear.y());
+    Serial.print(F(",z:"));
+    Serial.print(linear.z());
+    Serial.print(F("},g:{x:"));
+    Serial.print(gravity.x());
+    Serial.print(F(",y:"));
+    Serial.print(gravity.y());
+    Serial.print(F(",z:"));
+    Serial.print(gravity.z());
+    Serial.print(F("},c:{s:"));
+    Serial.print(sys);
+    Serial.print(F(",g:"));
+    Serial.print(gyro);
+    Serial.print(F(",a:"));
+    Serial.print(accel);
+    Serial.print(F(",m:"));
+    Serial.print(mag);
+    Serial.print(F("},m:"));
+    Serial.print(middle_finger);
+    Serial.print(F(",r:"));
+    Serial.print(ring_finger);
+    Serial.print(F(",lf:"));
+    Serial.print(little_finger);
+    Serial.println(F("}"));
+  }
+}
+
+void loop_analog(long now, long cycle_time) {
+  static long next = now;
+  if (now - next >= 0) {
+    next = now + cycle_time_ms;
+
+    middle_finger = analogRead(A7);
+    ring_finger = analogRead(A9);
+    little_finger = analogRead(A10);
+  }
+}
+
+void loop_imu(long now, long cycle_time) {
+  static long next = now;
+  if (now - next >= 0) {
+    next = now + cycle_time_ms;
+
+    euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
+    linear = bno.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
+    gravity = bno.getVector(Adafruit_BNO055::VECTOR_GRAVITY);
+
+    bno.getCalibration(&sys, &gyro, &accel, &mag);
+  }
+}
+
+void loop(void) {
+  long timestamp = millis();
+  loop_imu(timestamp, cycle_time_ms);
+  loop_analog(timestamp, cycle_time_ms);
+  loop_button(timestamp, cycle_time_ms * 4);
+  loop_serial(timestamp, cycle_time_ms);
+}
+
