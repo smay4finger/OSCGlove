@@ -18,6 +18,10 @@ Slider uiGravityX;
 Slider uiGravityY;
 Slider uiGravityZ;
 
+Slider uiMiddleFinger;
+Slider uiRingFinger;
+Slider uiLittleFinger;
+
 public void createUI() {
 
   cp5 = new ControlP5(this);
@@ -85,75 +89,81 @@ public void createUI() {
     .moveTo("global")
     ;
 
-  cp5.addLabel("Euler")
-    .setPosition(5, 25)
-    .setFont(createFont("", 15))
-    .moveTo("raw");
   uiEulerX = cp5.addSlider("X (euler)")
-    .setPosition(5, 47)
+    .setPosition(5, 25)
     .setSize(150, 12)
     .setRange(0, 360)
     .setLock(true)
     .moveTo("raw");
   uiEulerY = cp5.addSlider("Y (euler)")
-    .setPosition(5, 62)
+    .setPosition(5, 40)
     .setSize(150, 12)
     .setRange(-180, 180)
     .setLock(true)
     .moveTo("raw");
   uiEulerZ = cp5.addSlider("Z (euler)")
-    .setPosition(5, 77)
+    .setPosition(5, 55)
     .setSize(150, 12)
     .setRange(-180, 180)
     .setLock(true)
     .moveTo("raw");
 
-  cp5.addLabel("Linear Acceleration")
-    .setPosition(5, 94)
-    .setFont(createFont("", 15))
-    .moveTo("raw");
   uiLinearX = cp5.addSlider("X (linear)")
-    .setPosition(5, 116)
+    .setPosition(5, 75)
     .setSize(150, 12)
     .setRange(-10, 10)
     .setLock(true)
     .moveTo("raw");
   uiLinearY = cp5.addSlider("Y (linear)")
-    .setPosition(5, 131)
+    .setPosition(5, 90)
     .setSize(150, 12)
     .setRange(-10, 10)
     .setLock(true)
     .moveTo("raw");
   uiLinearZ = cp5.addSlider("Z (linear)")
-    .setPosition(5, 146)
+    .setPosition(5, 105)
     .setSize(150, 12)
     .setRange(-10, 10)
     .setLock(true)
     .moveTo("raw");
 
-  cp5.addLabel("Gravity")
-    .setPosition(5, 163)
-    .setFont(createFont("", 15))
-    .moveTo("raw");
   uiGravityX = cp5.addSlider("X (gravity)")
-    .setPosition(5, 185)
+    .setPosition(5, 125)
     .setSize(150, 12)
     .setRange(-10, 10)
     .setLock(true)
     .moveTo("raw");
   uiGravityY = cp5.addSlider("Y (gravity)")
-    .setPosition(5, 200)
+    .setPosition(5, 140)
     .setSize(150, 12)
     .setRange(-10, 10)
     .setLock(true)
     .moveTo("raw");
   uiGravityZ = cp5.addSlider("Z (gravity)")
-    .setPosition(5, 215)
+    .setPosition(5, 155)
     .setSize(150, 12)
     .setRange(-10, 10)
     .setLock(true)
     .moveTo("raw");
-}
+
+  uiMiddleFinger = cp5.addSlider("middle finger")
+    .setPosition(5, 185)
+    .setSize(150, 12)
+    .setRange(0, 1023)
+    .setLock(true)
+    .moveTo("raw");
+  uiRingFinger = cp5.addSlider("ring finger")
+    .setPosition(5, 200)
+    .setSize(150, 12)
+    .setRange(0, 1023)
+    .setLock(true)
+    .moveTo("raw");
+  uiLittleFinger = cp5.addSlider("little finger")
+    .setPosition(5, 215)
+    .setSize(150, 12)
+    .setRange(0, 1023)
+    .setLock(true)
+    .moveTo("raw");}
 
 void uiUpdate() {
   uiEulerX.setValue(gloveEulerX);
@@ -165,6 +175,9 @@ void uiUpdate() {
   uiGravityX.setValue(gloveGravityX);
   uiGravityY.setValue(gloveGravityY);
   uiGravityZ.setValue(gloveGravityZ);
+  uiMiddleFinger.setValue(gloveMiddleFinger);
+  uiRingFinger.setValue(gloveRingFinger);
+  uiLittleFinger.setValue(gloveLittleFinger);
 }
 
 void controlEvent(ControlEvent theEvent) {

@@ -12,6 +12,10 @@ public volatile float gloveGravityX = 0.0;
 public volatile float gloveGravityY = 0.0;
 public volatile float gloveGravityZ = 0.0;
 
+public volatile int gloveMiddleFinger = 0;
+public volatile int gloveRingFinger = 0;
+public volatile int gloveLittleFinger = 0;
+
 public void gloveConnect(String serialPort) {
   if (glove != null) {
     gloveDisconnect();
@@ -42,6 +46,9 @@ void serialEvent(Serial p) {
     gloveGravityX = data.getJSONObject("gravity").getFloat("x");
     gloveGravityY = data.getJSONObject("gravity").getFloat("y");
     gloveGravityZ = data.getJSONObject("gravity").getFloat("z");
+    gloveMiddleFinger = data.getInt("a1");
+    gloveRingFinger = data.getInt("a2");
+    gloveLittleFinger = data.getInt("a3");
 
     oscUpdate();
     uiUpdate();
