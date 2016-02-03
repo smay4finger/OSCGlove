@@ -16,6 +16,8 @@ public volatile int gloveMiddleFinger = 0;
 public volatile int gloveRingFinger = 0;
 public volatile int gloveLittleFinger = 0;
 
+public volatile int gloveButtons = 0;
+
 public void gloveConnect(String serialPort) {
   if (glove != null) {
     gloveDisconnect();
@@ -49,6 +51,7 @@ void serialEvent(Serial p) {
     gloveMiddleFinger = data.getInt("m");
     gloveRingFinger = data.getInt("r");
     gloveLittleFinger = data.getInt("lf");
+    gloveButtons = data.getInt("b");
 
     oscUpdate();
     uiUpdate();

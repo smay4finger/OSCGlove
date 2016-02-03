@@ -47,11 +47,17 @@ uint8_t sys, gyro, accel, mag;
 uint16_t middle_finger;
 uint16_t ring_finger;
 uint16_t little_finger;
+uint8_t buttons;
 
 void loop_button(long now, long cycle_time) {
   static long next = now;
   if (now - next >= 0) {
     next = now + cycle_time;
+
+    Wire.requestFrom(0x20, 1);
+    if (Wire.available()) {
+      buttons = ~ Wire.read();
+    }
   }
 }
 
@@ -91,6 +97,8 @@ void loop_serial(long now, long cycle_time) {
     Serial.print(ring_finger);
     Serial.print(F(",lf:"));
     Serial.print(little_finger);
+    Serial.print(F(",b:"));
+    Serial.print(buttons);
     Serial.println(F("}"));
   }
 }
