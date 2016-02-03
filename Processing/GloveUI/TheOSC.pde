@@ -28,9 +28,12 @@ void oscUpdate() {
     oscClient.send("/glove/Z", new Object[] { gloveEulerZ });
     oscClient.send("/glove/Y", new Object[] { gloveEulerY });
     oscClient.send("/glove/X", new Object[] { gloveEulerX });
+    oscClient.send("/glove/finger/middle", new Object[] { gloveMiddleFinger });
+    oscClient.send("/glove/finger/ring", new Object[] { gloveRingFinger });
+    oscClient.send("/glove/finger/little", new Object[] { gloveLittleFinger });
   }
 }
 
 void oscEvent(OscMessage theMessage) {
-  System.out.println("### got a message " + theMessage);
+  //System.out.println("### got a message " + theMessage);
 }
