@@ -164,7 +164,8 @@ public void createUI() {
     .setSize(150, 12)
     .setRange(0, 1023)
     .setLock(true)
-    .moveTo("raw");}
+    .moveTo("raw");
+}
 
 void uiUpdate() {
   uiEulerX.setValue(gloveEulerX);
