@@ -8,12 +8,12 @@ import java.util.*;
 PShape hand;
 
 void setup() {
-  size(300, 300, P3D);
+  size(400, 400, P3D);
   frameRate(30);
 
   createUI();
 
-  hand = createShape(BOX, 100, 10, 100);
+  hand = createShape(BOX, 150, 10, 150);
   hand.setFill(0x20ff0000);
 }
 
