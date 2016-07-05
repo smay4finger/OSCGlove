@@ -22,6 +22,9 @@ Slider uiMiddleFinger;
 Slider uiRingFinger;
 Slider uiLittleFinger;
 
+public Slider uiDiffRotation;
+public Slider uiDiffFinger;
+
 public void createUI() {
 
   cp5 = new ControlP5(this);
@@ -81,6 +84,20 @@ public void createUI() {
     .setSize(50, 20)
     .setLabel("connect")
     .setSwitch(true)
+    ;
+    
+  uiDiffRotation = cp5.addSlider("Diff (rotation)")
+    .setPosition(5, 25)
+    .setSize(150, 12)
+    .setRange(0, 5)
+    .moveTo("glove settings")
+    ;
+    
+  uiDiffFinger = cp5.addSlider("Diff (finger)")
+    .setPosition(5, 40)
+    .setSize(150,12)
+    .setRange(0, 10)
+    .moveTo("glove settings")
     ;
 
   cp5.addFrameRate()
