@@ -53,16 +53,26 @@ void serialEvent(Serial p) {
     gloveLittleFinger = data.getInt("lf");
     gloveButtons = data.getInt("b");
 
-    // rotate euler coordinates about X axis by -45°
     float alpha = radians(-45);
-    float x = gloveEulerX;
-    float y = cos(alpha)*gloveEulerY - sin(alpha)*gloveEulerZ;
-    float z = sin(alpha)*gloveEulerY + cos(alpha)*gloveEulerZ;
-
+    float x, y, z;
+    
+    // rotate euler coordinates about X axis by -45°
+    x = gloveEulerX;
+    y = cos(alpha)*gloveEulerY - sin(alpha)*gloveEulerZ;
+    z = sin(alpha)*gloveEulerY + cos(alpha)*gloveEulerZ;
     gloveEulerX = x;
     gloveEulerY = y;
     gloveEulerZ = z;
 
+    // rotate gravity coordinates about Z axis by -45°
+    alpha = radians(45);
+    x = cos(alpha)*gloveGravityX - sin(alpha)*gloveGravityY;
+    y = sin(alpha)*gloveGravityX + cos(alpha)*gloveGravityY;
+    z = gloveGravityZ;
+    gloveGravityX = x;
+    gloveGravityY = y;
+    gloveGravityZ = z;
+    
     oscUpdate();
     uiUpdate();
   }
