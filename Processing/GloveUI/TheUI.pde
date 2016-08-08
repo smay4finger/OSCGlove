@@ -90,6 +90,7 @@ public void createUI() {
     .setPosition(5, 25)
     .setSize(150, 12)
     .setRange(0, 5)
+    .setValue(0.5)
     .moveTo("glove settings")
     ;
     
@@ -97,6 +98,7 @@ public void createUI() {
     .setPosition(5, 40)
     .setSize(150,12)
     .setRange(0, 10)
+    .setValue(1)
     .moveTo("glove settings")
     ;
 
