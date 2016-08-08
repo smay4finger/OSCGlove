@@ -108,9 +108,9 @@ void loop_analog(long now, long cycle_time) {
   if (now - next >= 0) {
     next = now + cycle_time_ms;
 
-    middle_finger = analogRead(A6);
-    ring_finger = analogRead(A9);
-    little_finger = analogRead(A10);
+    middle_finger = analogRead(A11);
+    ring_finger = analogRead(A10);
+    little_finger = analogRead(A9);
   }
 }
 
